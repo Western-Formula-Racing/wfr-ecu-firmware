@@ -1,2 +1,2 @@
 # wfr-ecu-firmware
-Firmware for the WFR27 (and beyond, hopefully)
+Firmware for the WFR27 ECU (and beyond, hopefully)
