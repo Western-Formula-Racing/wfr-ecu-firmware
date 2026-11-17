@@ -1,0 +1,6 @@
+.pio
+.vscode
+build
+archive
+managed_components
+data
