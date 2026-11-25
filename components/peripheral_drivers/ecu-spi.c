@@ -1,7 +1,7 @@
 #include "driver/spi_master.h"
 #include "config.h"
+#include "peripheral_drivers.h"
 
-#define ECU_SPI_HOST SPI2_HOST
 
 void spi_init(){
   spi_bus_config_t cfg = {

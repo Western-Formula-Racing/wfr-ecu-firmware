@@ -20,6 +20,10 @@ void app_main() {
   i2c_init();
   ESP_LOGI(TAG,"- HSD");
   hsd_init();
+  ESP_LOGI(TAG,"- SPI");
+  spi_init();
+  ESP_LOGI(TAG,"- ADC");
+  adc_init();
 
   // main loop
   while(true){
