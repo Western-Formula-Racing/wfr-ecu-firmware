@@ -8,7 +8,15 @@
 #define TASK_INTERVAL_STATE 100 // task interval in ms
 #define DATA_MUTEX_TAKE_TIMEOUT 10 // max time to wait to take a data mutex
 
+#define TASK_INTERVAL_CAN_TX 10 // CAN transmit period in ms
+#define CAN_RX_TIMEOUT_MS 10 // max time the RX task blocks waiting for a frame
+#define CAN_BITRATE 500000
+#define CAN_RX_QUEUE_DEPTH 32
+
 // pin definitions
+
+#define PIN_CAN_TX GPIO_NUM_4 // TODO: placeholder, set to the real TWAI pins
+#define PIN_CAN_RX GPIO_NUM_5
 
 #define PIN_SDA GPIO_NUM_17
 #define PIN_SCL GPIO_NUM_7
