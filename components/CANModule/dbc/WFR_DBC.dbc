@@ -329,19 +329,19 @@ BO_ 2024 VCU_Front_IMU_1: 8 FRONT_ECU
  SG_ Front_Accel_Z : 32|16@1- (0.01,0) [0|0] "" Vector__XXX
 
 BO_ 2025 VCU_Front_IMU_2: 8 FRONT_ECU
- SG_ Front_Gyro_X : 0|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ Front_Gyro_Y : 16|16@1- (1,0) [0|0] "" Vector__XXX
- SG_ Front_Gyro_Z : 32|16@1- (1,0) [0|0] "" Vector__XXX
+ SG_ Front_Gyro_X : 0|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Front_Gyro_Y : 16|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Front_Gyro_Z : 32|16@1- (0.01,0) [0|0] "" Vector__XXX
 
 BO_ 2026 VCU_Rear_IMU_1: 8 REAR_ECU
- SG_ Rear_Accel_X : 0|16@1+ (0.01,0) [0|0] "" Vector__XXX
- SG_ Rear_Accel_Z : 32|16@1+ (0.01,0) [0|0] "" Vector__XXX
- SG_ Rear_Accel_Y : 16|16@1+ (0.01,0) [0|0] "" Vector__XXX
+ SG_ Rear_Accel_X : 0|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Rear_Accel_Z : 32|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Rear_Accel_Y : 16|16@1- (0.01,0) [0|0] "" Vector__XXX
 
 BO_ 2027 VCU_Rear_IMU_2: 8 REAR_ECU
- SG_ Rear_Gyro_X : 0|16@1+ (1,0) [0|0] "" Vector__XXX
- SG_ Rear_Gyro_Y : 16|16@1+ (1,0) [0|0] "" Vector__XXX
- SG_ Rear_Gyro_Z : 32|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Rear_Gyro_X : 0|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Rear_Gyro_Y : 16|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Rear_Gyro_Z : 32|16@1- (0.01,0) [0|0] "" Vector__XXX
 
 BO_ 1200 BASE_STATION_ALIVE: 8 BASESTATION
 

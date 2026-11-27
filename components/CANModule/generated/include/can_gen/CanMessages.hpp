@@ -329,9 +329,9 @@ struct VCUFrontIMU1Message {
 };
 
 struct VCUFrontIMU2Message {
-    int16_t frontGyroX = {};
-    int16_t frontGyroY = {};
-    int16_t frontGyroZ = {};
+    float frontGyroX = {};
+    float frontGyroY = {};
+    float frontGyroZ = {};
 };
 
 struct VCURearIMU1Message {
@@ -341,9 +341,9 @@ struct VCURearIMU1Message {
 };
 
 struct VCURearIMU2Message {
-    uint16_t rearGyroX = {};
-    uint16_t rearGyroY = {};
-    uint16_t rearGyroZ = {};
+    float rearGyroX = {};
+    float rearGyroY = {};
+    float rearGyroZ = {};
 };
 
 struct BASESTATIONALIVEMessage {

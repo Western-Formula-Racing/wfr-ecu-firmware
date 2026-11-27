@@ -3067,17 +3067,23 @@ bool encodeVCUFrontIMU2Message(const VCUFrontIMU2Message& msg, CanFrame& frame) 
     std::memset(frame.data, 0, sizeof(frame.data));
 
     {
-        const int64_t rawSigned = static_cast<int64_t>(msg.frontGyroX);
+        const double physicalValue = static_cast<double>(msg.frontGyroX);
+        const double rawDouble = (physicalValue - (0.0)) / (0.01);
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
         const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 0U, 16U, rawValue);
     }
     {
-        const int64_t rawSigned = static_cast<int64_t>(msg.frontGyroY);
+        const double physicalValue = static_cast<double>(msg.frontGyroY);
+        const double rawDouble = (physicalValue - (0.0)) / (0.01);
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
         const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 16U, 16U, rawValue);
     }
     {
-        const int64_t rawSigned = static_cast<int64_t>(msg.frontGyroZ);
+        const double physicalValue = static_cast<double>(msg.frontGyroZ);
+        const double rawDouble = (physicalValue - (0.0)) / (0.01);
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
         const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 32U, 16U, rawValue);
     }
@@ -3096,15 +3102,18 @@ bool decodeVCUFrontIMU2Message(const CanFrame& frame, VCUFrontIMU2Message& msg) 
 
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 0U, 16U);
-        msg.frontGyroX = static_cast<int16_t>(signExtend(rawValue, 16U));
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.frontGyroX = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 16U, 16U);
-        msg.frontGyroY = static_cast<int16_t>(signExtend(rawValue, 16U));
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.frontGyroY = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 32U, 16U);
-        msg.frontGyroZ = static_cast<int16_t>(signExtend(rawValue, 16U));
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.frontGyroZ = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
 
     return true;
@@ -3124,19 +3133,22 @@ bool encodeVCURearIMU1Message(const VCURearIMU1Message& msg, CanFrame& frame) {
     {
         const double physicalValue = static_cast<double>(msg.rearAccelX);
         const double rawDouble = (physicalValue - (0.0)) / (0.01);
-        const uint64_t rawValue = static_cast<uint64_t>(std::llround(rawDouble));
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
+        const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 0U, 16U, rawValue);
     }
     {
         const double physicalValue = static_cast<double>(msg.rearAccelZ);
         const double rawDouble = (physicalValue - (0.0)) / (0.01);
-        const uint64_t rawValue = static_cast<uint64_t>(std::llround(rawDouble));
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
+        const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 32U, 16U, rawValue);
     }
     {
         const double physicalValue = static_cast<double>(msg.rearAccelY);
         const double rawDouble = (physicalValue - (0.0)) / (0.01);
-        const uint64_t rawValue = static_cast<uint64_t>(std::llround(rawDouble));
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
+        const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 16U, 16U, rawValue);
     }
 
@@ -3154,15 +3166,18 @@ bool decodeVCURearIMU1Message(const CanFrame& frame, VCURearIMU1Message& msg) {
 
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 0U, 16U);
-        msg.rearAccelX = static_cast<float>((static_cast<double>(rawValue) * (0.01)) + (0.0));
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.rearAccelX = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 32U, 16U);
-        msg.rearAccelZ = static_cast<float>((static_cast<double>(rawValue) * (0.01)) + (0.0));
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.rearAccelZ = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 16U, 16U);
-        msg.rearAccelY = static_cast<float>((static_cast<double>(rawValue) * (0.01)) + (0.0));
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.rearAccelY = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
 
     return true;
@@ -3180,15 +3195,24 @@ bool encodeVCURearIMU2Message(const VCURearIMU2Message& msg, CanFrame& frame) {
     std::memset(frame.data, 0, sizeof(frame.data));
 
     {
-        const uint64_t rawValue = static_cast<uint64_t>(msg.rearGyroX);
+        const double physicalValue = static_cast<double>(msg.rearGyroX);
+        const double rawDouble = (physicalValue - (0.0)) / (0.01);
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
+        const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 0U, 16U, rawValue);
     }
     {
-        const uint64_t rawValue = static_cast<uint64_t>(msg.rearGyroY);
+        const double physicalValue = static_cast<double>(msg.rearGyroY);
+        const double rawDouble = (physicalValue - (0.0)) / (0.01);
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
+        const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 16U, 16U, rawValue);
     }
     {
-        const uint64_t rawValue = static_cast<uint64_t>(msg.rearGyroZ);
+        const double physicalValue = static_cast<double>(msg.rearGyroZ);
+        const double rawDouble = (physicalValue - (0.0)) / (0.01);
+        const int64_t rawSigned = static_cast<int64_t>(std::llround(rawDouble));
+        const uint64_t rawValue = static_cast<uint64_t>(rawSigned);
         insertIntelBits(frame.data, 32U, 16U, rawValue);
     }
 
@@ -3206,15 +3230,18 @@ bool decodeVCURearIMU2Message(const CanFrame& frame, VCURearIMU2Message& msg) {
 
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 0U, 16U);
-        msg.rearGyroX = static_cast<uint16_t>(rawValue);
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.rearGyroX = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 16U, 16U);
-        msg.rearGyroY = static_cast<uint16_t>(rawValue);
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.rearGyroY = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
     {
         const uint64_t rawValue = extractIntelBits(frame.data, 32U, 16U);
-        msg.rearGyroZ = static_cast<uint16_t>(rawValue);
+        const int64_t signedValue = signExtend(rawValue, 16U);
+        msg.rearGyroZ = static_cast<float>((static_cast<double>(signedValue) * (0.01)) + (0.0));
     }
 
     return true;
