@@ -1,0 +1,21 @@
+idf_component_register(
+    SRCS
+        core/src/CanInterface.cpp
+        core/src/CanPermissions.cpp
+        core/src/CanStack.cpp
+        generated/src/CanCodec.cpp
+        generated/src/CanStateCacheUpdate.cpp
+        platform/freertos/src/FreeRtosMutex.cpp
+        platform/espidf/src/TwaiDriver.cpp
+        platform/espidf/src/TwaiStackFactory.cpp
+        platform/espidf/src/EspClock.cpp
+    INCLUDE_DIRS
+        core/include
+        generated/include
+        platform/freertos/include
+        platform/espidf/include
+    REQUIRES
+        freertos
+        esp_driver_twai
+        esp_timer
+)

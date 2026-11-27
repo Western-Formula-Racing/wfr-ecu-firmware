@@ -6,11 +6,16 @@ typedef struct{
 } rtcData_t;
 
 typedef struct{
-
+  float adcVoltages[14];
 } adcData_t;
 
 typedef struct{
-
+  float accelX;
+  float accelY;
+  float accelZ;
+  float gyroX;
+  float gyroY;
+  float gyroZ;
 } imuData_t;
 
 typedef struct{
@@ -22,7 +27,9 @@ typedef struct{
 } hsdData_t;
 
 typedef struct{
-
+  bool HVActive;
+  float soc;
+  int16_t bmsState;
 } bmsData_t;
 
 typedef struct{

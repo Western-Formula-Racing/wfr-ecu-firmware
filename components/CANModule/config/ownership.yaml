@@ -1,0 +1,23 @@
+# Maps the module names in the DBC to the module names in the code. 
+# This is used to determine which module is responsible for which messages. 
+# The keys should be the same as the node names in the DBC file, and the values should be the same as the module names in the code.
+
+node_map:
+  INV: MODULE_INV
+  ORIONBMS: MODULE_ORIONBMS
+  VCU: MODULE_ECU
+  CUSTOMBMS: MODULE_BMS
+  ELCON: MODULE_ELCON
+  MOBO: MODULE_MOBO
+  BASESTATION: MODULE_BASESTATION
+  STRWHEL: MODULE_SWIFT
+  SWIFT: MODULE_SWIFT
+
+
+# optional overrides if DBC sender is wrong or too generic
+# If the sender is not correct in the DBC, you can specify the correct sender here. This is useful if the DBC is not accurate.
+# The message name should be the EXACT SAME as in the DBC file
+overrides: {
+# EXAMPLE: 
+#   PackStatus: MODULE_BMS
+}

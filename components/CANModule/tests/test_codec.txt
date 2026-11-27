@@ -1,0 +1,93 @@
+// #include <cassert>
+// #include <cmath>
+// #include <iostream>
+
+// #include "can/CanFrame.hpp"
+// #include "can_gen/CanMessages.hpp"
+// #include "can_gen/CanCodec.hpp"
+
+// static bool nearlyEqual(float a, float b, float eps = 0.001f) {
+//     return std::fabs(a - b) < eps;
+// }
+
+// int main() {
+//     std::cout << "Running CAN codec tests...\n";
+
+//     // =========================================================
+//     // Test 1: Simple Intel message (bool + simple values)
+//     // =========================================================
+//     {
+//         VCUPDMRearCmdMessage tx{};
+//         tx.rearCmdHSD1 = 1.0f;
+//         tx.rearCmdHSD2 = 0.0f;
+//         tx.rearCmdHSD3 = 1.0f;
+//         tx.rearCmdHSD4 = 0.0f;
+//         tx.rearCmdHSD5 = 1.0f;
+//         tx.rearCmdHSD6 = 0.0f;
+//         tx.rearCmdHSD7 = 1.0f;
+//         tx.rearCmdHSD8 = 0.0f;
+
+//         CanFrame frame{};
+//         bool ok = encodeVCUPDMRearCmdMessage(tx, frame);
+//         assert(ok);
+
+//         VCUPDMRearCmdMessage rx{};
+//         ok = decodeVCUPDMRearCmdMessage(frame, rx);
+//         assert(ok);
+
+//         assert(nearlyEqual(tx.rearCmdHSD1, rx.rearCmdHSD1));
+//         assert(nearlyEqual(tx.rearCmdHSD2, rx.rearCmdHSD2));
+//         assert(nearlyEqual(tx.rearCmdHSD3, rx.rearCmdHSD3));
+//         assert(nearlyEqual(tx.rearCmdHSD4, rx.rearCmdHSD4));
+
+//         std::cout << "Test 1 passed\n";
+//     }
+
+//     // =========================================================
+//     // Test 2: Intel with scaling / signed
+//     // =========================================================
+//     {
+//         M172TorqueAndTimerInfoMessage tx{};
+//         tx.iNVPowerOnTimer = 123.0f;
+//         tx.iNVTorqueFeedback = -50.0f;
+//         tx.iNVCommandedTorque = 75.0f;
+
+//         CanFrame frame{};
+//         bool ok = encodeM172TorqueAndTimerInfoMessage(tx, frame);
+//         assert(ok);
+
+//         M172TorqueAndTimerInfoMessage rx{};
+//         ok = decodeM172TorqueAndTimerInfoMessage(frame, rx);
+//         assert(ok);
+
+//         assert(nearlyEqual(tx.iNVPowerOnTimer, rx.iNVPowerOnTimer));
+//         assert(nearlyEqual(tx.iNVTorqueFeedback, rx.iNVTorqueFeedback));
+//         assert(nearlyEqual(tx.iNVCommandedTorque, rx.iNVCommandedTorque));
+
+//         std::cout << "Test 2 passed\n";
+//     }
+
+//     // =========================================================
+//     // Test 3: Metadata validation (should fail)
+//     // =========================================================
+//     {
+//         VCUPDMRearCmdMessage tx{};
+//         tx.rearCmdHSD1 = 1.0f;
+
+//         CanFrame frame{};
+//         bool ok = encodeVCUPDMRearCmdMessage(tx, frame);
+//         assert(ok);
+
+//         // Corrupt CAN ID
+//         frame.id = 999999;
+
+//         VCUPDMRearCmdMessage rx{};
+//         ok = decodeVCUPDMRearCmdMessage(frame, rx);
+//         assert(!ok);
+
+//         std::cout << "Test 3 passed (failure case)\n";
+//     }
+
+//     std::cout << "All tests passed\n";
+//     return 0;
+// }

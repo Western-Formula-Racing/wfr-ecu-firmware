@@ -1,0 +1,17 @@
+{
+  "name": "CANModule",
+  "version": "1.0.0",
+  "build": {
+    "srcDir": ".",
+    "srcFilter": [
+      "+<core/src/*.cpp>",
+      "+<generated/src/*.cpp>",
+      "+<platform/espidf/src/*.cpp>"
+    ],
+    "flags": [
+      "-Icore/include",
+      "-Igenerated/include",
+      "-Iplatform/espidf/include"
+    ]
+  }
+}

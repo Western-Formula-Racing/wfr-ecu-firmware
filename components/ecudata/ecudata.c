@@ -16,6 +16,10 @@ static SemaphoreHandle_t inverter_mutex;
 static SemaphoreHandle_t imu_mutex;
 static SemaphoreHandle_t state_mutex;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void initEcuData(void){
   gpio_mutex = xSemaphoreCreateMutex();
   adc_mutex = xSemaphoreCreateMutex();
@@ -195,3 +199,7 @@ bool getEcuState(ecu_state_e* state){
     return false;
   }
 }
+
+#ifdef __cplusplus
+}
+#endif
