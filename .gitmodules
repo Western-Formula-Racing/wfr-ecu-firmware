@@ -1,0 +1,3 @@
+[submodule "components/components/CANModule"]
+	path = components/components/CANModule
+	url = https://github.com/Western-Formula-Racing/CANModule
