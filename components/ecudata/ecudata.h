@@ -27,7 +27,9 @@ typedef struct{
 } hsdData_t;
 
 typedef struct{
-
+  bool HVActive;
+  float soc;
+  int16_t bmsState;
 } bmsData_t;
 
 typedef struct{

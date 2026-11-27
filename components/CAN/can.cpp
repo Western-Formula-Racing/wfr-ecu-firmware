@@ -34,8 +34,25 @@ bool can_init(void){
 // Blocks up to CAN_RX_TIMEOUT_MS waiting for a frame, decodes it and writes it to the
 // internal state cache under mutex. Other tasks read it through gCanStack.can().snapshot().
 void canRxTask(void* pvParameters){
+  // The cache is several KB, so keep the copy on the heap instead of this task's stack.
+  CanStateCache* state = new CanStateCache();
+  TickType_t lastSnapshot = xTaskGetTickCount();
+  bmsData_t canBmsData;
+
   while(true){
     gCanStack.can().receiveAnyAndUpdate(CAN_RX_TIMEOUT_MS);
+
+    // runs every TASK_INTERVAL_CAN_SNAPSHOT ms
+    if((xTaskGetTickCount() - lastSnapshot) >= pdMS_TO_TICKS(TASK_INTERVAL_CAN_SNAPSHOT)){
+      lastSnapshot = xTaskGetTickCount();
+      *state = gCanStack.can().snapshot();
+      //copy bms data
+      if(getBmsData(&canBmsData)){
+        canBmsData.bmsState = state->mOBOPackStatus.bMSState;
+        canBmsData.HVActive = state->mOBOPackStatus.gPIOHVACT;
+        canBmsData.soc = state->mOBOPackStatus.sOC;
+      }
+    }
   }
 }
 

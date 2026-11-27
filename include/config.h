@@ -18,7 +18,7 @@
 #define CAN_RX_TIMEOUT_MS 10 // max time the RX task blocks waiting for a frame
 #define CAN_BITRATE 500000
 #define CAN_RX_QUEUE_DEPTH 32
-
+#define TASK_INTERVAL_CAN_SNAPSHOT 10 // how often the RX task copies the CAN state cache, in ms
 // pin definitions
 
 #define PIN_FRONT_REAR GPIO_NUM_3
