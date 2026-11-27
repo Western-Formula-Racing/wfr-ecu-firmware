@@ -5,6 +5,7 @@
 
 #include "driver/gpio.h"
 
+#define ADC_TO_V(x) ((float)(x) * (4.096f / 65535.0f) * 1.25f)
 // RTOS-related defines
 #define TASK_INTERVAL_STATE 100 // task interval in ms
 #define DATA_MUTEX_TAKE_TIMEOUT 10 // max time to wait to take a data mutex
@@ -19,6 +20,7 @@
 #define CAN_BITRATE 500000
 #define CAN_RX_QUEUE_DEPTH 32
 #define TASK_INTERVAL_CAN_SNAPSHOT 10 // how often the RX task copies the CAN state cache, in ms
+
 // pin definitions
 
 #define PIN_FRONT_REAR GPIO_NUM_3
