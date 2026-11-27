@@ -5,7 +5,7 @@
 #include "peripheral_drivers.h"
 
 #define ADC_SPI_MODE     1
-#define ADC_SPI_CLK_HZ   (10 * 1000 * 1000) // 10MHZ
+#define ADC_SPI_CLK_HZ   (2 * 1000 * 1000) // 2MHZ (10MHz sampled MISO a bit late; raise with input_delay_ns)
 
 static spi_device_handle_t adc1Handle;
 static spi_device_handle_t adc2Handle;
@@ -105,6 +105,6 @@ uint16_t adc_read_channel(uint8_t channel){
   spi_device_polling_transmit(handle, &selectChannel);
   spi_device_polling_transmit(handle, &readChannel);
   spi_device_release_bus(handle);
-
+  printf("Read bytes: %d %d %d %d",readChannel.rx_data[0],readChannel.rx_data[1],readChannel.rx_data[2],readChannel.rx_data[3]);
   return (readChannel.rx_data[2] << 8) | readChannel.rx_data[3];
 }
